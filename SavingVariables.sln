@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SavingConstants", "..\SavingConstants\SavingConstants\SavingConstants.csproj", "{DE21ED12-6E5E-4A8F-82AA-F9BADC69A662}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SavingVariables", "..\saving-variables-individual-assignment-bernardanderson\SavingVariables\SavingVariables.csproj", "{DE21ED12-6E5E-4A8F-82AA-F9BADC69A662}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SavingConstants.Tests", "..\SavingConstants\SavingConstants.Tests\SavingConstants.Tests.csproj", "{8166C544-6AFB-41D4-880F-EBDA7A26DB67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SavingVariables.Tests", "..\saving-variables-individual-assignment-bernardanderson\SavingVariables.Tests\SavingVariables.Tests.csproj", "{8166C544-6AFB-41D4-880F-EBDA7A26DB67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
