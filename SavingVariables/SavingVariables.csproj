@@ -60,6 +60,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NonDatabaseCommands.cs" />
+    <Compile Include="UserEntryData.cs" />
+    <Compile Include="Expressions.cs" />
+    <Compile Include="DatabaseCommands.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
