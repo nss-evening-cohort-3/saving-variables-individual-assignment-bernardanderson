@@ -20,7 +20,8 @@ namespace SavingVariables
             @"^\s*(remove)\s*(all)\s*$",                          // For remove all
             @"^\s*(delete)\s*([a-zA-Z])\s*$",                     // For delete
             @"^\s*(delete)\s*(all)\s*$",                          // For delete all
-            @"^\s*(show all)\s*$"                                 // For show all
+            @"^\s*(show all)\s*$",                                // For show all
+            @"^\s*(lastq)\s*$"                                    // For lastq
         };
 
         // This cycles through the RegEx's in the array above to see if a match can be made against the user entered command.
@@ -34,7 +35,7 @@ namespace SavingVariables
                     Match matchedFields = new Regex(regularExpressions[i]).Match(sentUserInputFromCommandPrompt.EnteredUserString);
                     sentUserInputFromCommandPrompt.ValidEntry = true;
                     sentUserInputFromCommandPrompt.UserCommand = matchedFields.Groups[1].ToString();
-                    sentUserInputFromCommandPrompt.UserVariableEqualsOrAll = matchedFields.Groups[2].ToString();
+                    sentUserInputFromCommandPrompt.UserVariable = matchedFields.Groups[2].ToString();
                     sentUserInputFromCommandPrompt.UserNumericValue = matchedFields.Groups[3].ToString();
 
                     return sentUserInputFromCommandPrompt;

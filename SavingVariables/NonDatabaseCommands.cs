@@ -16,23 +16,38 @@ namespace SavingVariables
             { "show all", "List all set variables in a tabular format" }
         };
 
+        DatabaseCommands userDatabaseCommands = new DatabaseCommands();
+
         public UserEntryData RouteUserCommandToCorrectMethod(UserEntryData sentUserEntryData)
         {
-            if (sentUserEntryData.UserCommand == "help")
+            switch (sentUserEntryData.UserCommand)
             {
-                sentUserEntryData.consoleOutputString = ReturnListOfCommandsWhenHelpIsEntered();
-            }
-            else if (sentUserEntryData.UserCommand == "exit" || sentUserEntryData.UserCommand == "quit")
-            {
-                sentUserEntryData.WantsToExit = true;
-                sentUserEntryData.consoleOutputString = "Goodbye!";
+                case ("help"):
+                    sentUserEntryData.consoleOutputString = ReturnListOfCommandsWhenHelpIsEntered();
+                    break;
+                case ("exit"):
+                case ("quit"):
+                    sentUserEntryData.WantsToExit = true;
+                    sentUserEntryData.consoleOutputString = "Goodbye!";
+                    break;
+                case ("clear"):
+                case ("delete"):
+                case ("remove"):
+                    //sentUserEntryData.consoleOutputString = userDatabaseCommands.DeleteVariable();
+                    break;
+                case ("lastq"):
+                    sentUserEntryData.consoleOutputString = sentUserEntryData.LastQ;
+                    break;
+                default: //The default has to be the setting/adding of a variable
+                    userDatabaseCommands.AddVariable(sentUserEntryData);
+                    break;
             }
             return sentUserEntryData;
         }
         
         public string ReturnListOfCommandsWhenHelpIsEntered()
         {
-            string helpCommandOutput = " **Current list of user commands**\n";
+            string helpCommandOutput = " **List of possible user commands**\n";
             List<string> tempKeyList = simpleUserCommands.Keys.ToList();
             tempKeyList.Sort();
 

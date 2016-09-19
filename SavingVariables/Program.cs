@@ -34,7 +34,18 @@ namespace SavingVariables
                 {
                     userEntryData.consoleOutputString = "Invalid Command";
                 }
+
                 Console.WriteLine(userEntryData.consoleOutputString);
+
+                if (userEntryData.consoleOutputString == "Goodbye!")
+                {
+                    Console.ReadKey();
+                    break;
+                } else
+                {
+                    // Sets the 'lastq' command's data for every command except quit/exit
+                    userEntryData.LastQ = userEntryData.EnteredUserString;
+                }
             }
         }
     }

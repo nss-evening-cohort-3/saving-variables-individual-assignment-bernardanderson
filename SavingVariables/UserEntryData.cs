@@ -13,7 +13,8 @@ namespace SavingVariables
         public bool WantsToExit { get; set; } = false;
         public string EnteredUserString { get; set; } = "blank";
         public string UserCommand { get; set; } = "blank";
-        public string UserVariableEqualsOrAll { get; set; } = "blank";
+        public string LastQ { get; set; } = null;
+        public string UserVariable { get; set; } = "blank";
         public string UserNumericValue { get; set; } = "blank";
         public string consoleOutputString { get; set; } = "**Blank Console Output**";
     }
