@@ -29,7 +29,7 @@ namespace SavingVariables
             }
             return sentUserEntryData;
         }
-
+        
         public string ReturnListOfCommandsWhenHelpIsEntered()
         {
             string helpCommandOutput = " **Current list of user commands**\n";
