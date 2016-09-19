@@ -5,7 +5,6 @@ using System.Text;
 using SavingVariables.Models;
 using System.Threading.Tasks;
 
-
 namespace SavingVariables
 {
     class DatabaseCommands
@@ -18,13 +17,21 @@ namespace SavingVariables
             // sentUserEntryDataForDelete.UserVariable;
             return true;
         }
-        public bool AddVariable(UserEntryData sentUserEntryDataForDelete)
+        public bool AddVariable(UserEntryData sentUserEntryDataForAdd)
         {
-            //Check for presence of variable
-            // if there, "Variable already set!" 
-            // if not, set it!
-            // sentUserEntryDataForDelete.UserVariable;
-            // sentUserEntryDataForDelete.UserNumericValue;
+            using (VariablesContext context = new VariablesContext())
+            {
+                Variables newVariable = new Variables()
+                {
+                    VariableName = sentUserEntryDataForAdd.UserVariable,
+                    VariableValue = Convert.ToInt32(sentUserEntryDataForAdd.UserNumericValue)
+                };
+
+                //The Context needs to add to the table context.TableName.Add
+                context.VariablesTable.Add(newVariable);
+                context.SaveChanges();
+            }
+
             return true;
         }
 
