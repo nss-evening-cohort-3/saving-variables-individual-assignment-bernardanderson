@@ -22,6 +22,9 @@ namespace SavingVariables
         {
             switch (sentUserEntryData.UserCommand)
             {
+                case ("show all"):
+                    sentUserEntryData.consoleOutputString = userDatabaseCommands.ReturnAllVariableEqualities(sentUserEntryData);
+                    break;
                 case ("help"):
                     sentUserEntryData.consoleOutputString = ReturnListOfCommandsWhenHelpIsEntered();
                     break;
@@ -33,7 +36,14 @@ namespace SavingVariables
                 case ("clear"):
                 case ("delete"):
                 case ("remove"):
-                    //sentUserEntryData.consoleOutputString = userDatabaseCommands.DeleteVariable();
+                    if (userDatabaseCommands.IsVariableAlreadyPresent(sentUserEntryData))
+                    {
+                        sentUserEntryData.consoleOutputString = $"Error! {sentUserEntryData.UserCommand} is already defined!";
+                    }
+                    else
+                    {
+                        sentUserEntryData = userDatabaseCommands.AddVariable(sentUserEntryData);
+                    }
                     break;
                 case ("lastq"):
                     sentUserEntryData.consoleOutputString = sentUserEntryData.LastQ;

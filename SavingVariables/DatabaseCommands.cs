@@ -40,8 +40,7 @@ namespace SavingVariables
                     VariableName = sentUserEntryDataForAdd.UserCommand,
                     VariableValue = Convert.ToInt32(sentUserEntryDataForAdd.UserNumericValue)
                 };
-
-                //The Context needs to add to the table Context.TableName.Add()
+                // The Context needs to add to the table via Context.TableName.Add()
                 Context.VariablesTable.Add(newVariable);
                 Context.SaveChanges();
             }
@@ -49,10 +48,25 @@ namespace SavingVariables
             return sentUserEntryDataForAdd;
         }
 
-        public bool ReturnAllVariableEqualities(UserEntryData sentUserEntryForShowAll)
+        public string ReturnAllVariableEqualities(UserEntryData sentUserEntryForShowAll)
         {
-            // Database pull for showing all variable relationships
-            return true;
+            string tableListOfVariables = "";
+            // Using 'using (context){}' makes sure the database closes after saving
+            using (VariablesContext Context = new VariablesContext())
+            {
+                tableListOfVariables = " ----------------- \n";
+                tableListOfVariables += "|  Name  |  Value |\n";
+                tableListOfVariables += " ----------------- \n";
+
+                var databaseVariables = Context.VariablesTable;
+                foreach (var databaseLine in databaseVariables)
+                {
+                    tableListOfVariables += $"|   {databaseLine.VariableName}    |    {databaseLine.VariableValue}   |\n";
+                }
+                tableListOfVariables += " ----------------- \n";
+            }
+                // Database pull for showing all variable relationships
+                return tableListOfVariables;
         }
     }
 }
