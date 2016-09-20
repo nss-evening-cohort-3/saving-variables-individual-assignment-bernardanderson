@@ -36,21 +36,20 @@ namespace SavingVariables
                 case ("clear"):
                 case ("delete"):
                 case ("remove"):
-                    if (userDatabaseCommands.IsVariableAlreadyPresent(sentUserEntryData))
+                    if (userDatabaseCommands.IsVariableAlreadyPresentForRemove(sentUserEntryData))
                     {
-                        sentUserEntryData.consoleOutputString = $"Error! {sentUserEntryData.UserCommand} is already defined!";
+                        sentUserEntryData.consoleOutputString = userDatabaseCommands.DeleteVariables(sentUserEntryData);
                     }
                     else
                     {
-                        sentUserEntryData.consoleOutputString = userDatabaseCommands.DeleteVariable(sentUserEntryData);
+                        sentUserEntryData.consoleOutputString = $"Error! {sentUserEntryData.UserVariable} is not defined!";
                     }
                     break;
                 case ("lastq"):
                     sentUserEntryData.consoleOutputString = sentUserEntryData.LastQ;
                     break;
                 default: //The default has to be the setting/adding of a variable
-
-                    if (userDatabaseCommands.IsVariableAlreadyPresent(sentUserEntryData))
+                    if (userDatabaseCommands.IsVariableAlreadyPresentForAdd(sentUserEntryData))
                     {
                         sentUserEntryData.consoleOutputString = $"Error! {sentUserEntryData.UserCommand} is already defined!";
                     } else
