@@ -39,7 +39,14 @@ namespace SavingVariables
                     sentUserEntryData.consoleOutputString = sentUserEntryData.LastQ;
                     break;
                 default: //The default has to be the setting/adding of a variable
-                    userDatabaseCommands.AddVariable(sentUserEntryData);
+
+                    if (userDatabaseCommands.IsVariableAlreadyPresent(sentUserEntryData))
+                    {
+                        sentUserEntryData.consoleOutputString = $"Error! {sentUserEntryData.UserCommand} is already defined!";
+                    } else
+                    {
+                        sentUserEntryData = userDatabaseCommands.AddVariable(sentUserEntryData);
+                    }
                     break;
             }
             return sentUserEntryData;

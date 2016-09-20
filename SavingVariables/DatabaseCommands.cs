@@ -9,6 +9,18 @@ namespace SavingVariables
 {
     class DatabaseCommands
     {
+        // Checks for the presence of a variable in the database 
+        public bool IsVariableAlreadyPresent(UserEntryData sentUserEntryDataForAdd)
+        {
+            // Using 'using (context){}' makes sure the database closes after saving
+            using (VariablesContext Context = new VariablesContext())
+            {
+                // The .Where() is using LINQ syntax to search the database for what variable the user had entered
+                //  If the variable is found then the .Count != 0
+                int variableFound = Context.VariablesTable.Where(b => b.VariableName == sentUserEntryDataForAdd.UserCommand).Count();
+                return (variableFound == 0) ? false : true;
+            }
+        }
         public bool DeleteVariable(UserEntryData sentUserEntryDataForDelete)
         {
             //Check for presence of variable or 'all'
@@ -17,22 +29,24 @@ namespace SavingVariables
             // sentUserEntryDataForDelete.UserVariable;
             return true;
         }
-        public bool AddVariable(UserEntryData sentUserEntryDataForAdd)
+
+        public UserEntryData AddVariable(UserEntryData sentUserEntryDataForAdd)
         {
-            using (VariablesContext context = new VariablesContext())
+            // Using 'using (context){}' makes sure the database closes after saving
+            using (VariablesContext Context = new VariablesContext())
             {
                 Variables newVariable = new Variables()
                 {
-                    VariableName = sentUserEntryDataForAdd.UserVariable,
+                    VariableName = sentUserEntryDataForAdd.UserCommand,
                     VariableValue = Convert.ToInt32(sentUserEntryDataForAdd.UserNumericValue)
                 };
 
-                //The Context needs to add to the table context.TableName.Add
-                context.VariablesTable.Add(newVariable);
-                context.SaveChanges();
+                //The Context needs to add to the table Context.TableName.Add()
+                Context.VariablesTable.Add(newVariable);
+                Context.SaveChanges();
             }
-
-            return true;
+            sentUserEntryDataForAdd.consoleOutputString = $"{sentUserEntryDataForAdd.UserCommand} = {sentUserEntryDataForAdd.UserNumericValue} added to database";
+            return sentUserEntryDataForAdd;
         }
 
         public bool ReturnAllVariableEqualities(UserEntryData sentUserEntryForShowAll)
