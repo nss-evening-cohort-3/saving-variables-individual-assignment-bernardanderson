@@ -42,7 +42,7 @@ namespace SavingVariables
                     }
                     else
                     {
-                        sentUserEntryData = userDatabaseCommands.AddVariable(sentUserEntryData);
+                        sentUserEntryData.consoleOutputString = userDatabaseCommands.DeleteVariable(sentUserEntryData);
                     }
                     break;
                 case ("lastq"):

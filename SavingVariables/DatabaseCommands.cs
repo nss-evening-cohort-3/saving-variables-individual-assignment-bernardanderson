@@ -21,13 +21,18 @@ namespace SavingVariables
                 return (variableFound == 0) ? false : true;
             }
         }
-        public bool DeleteVariable(UserEntryData sentUserEntryDataForDelete)
+        public string DeleteVariable(UserEntryData sentUserEntryDataForDelete)
         {
-            //Check for presence of variable or 'all'
-            // if there, delete it! 
-            // if not, "Variable not set!"
-            // sentUserEntryDataForDelete.UserVariable;
-            return true;
+            // Using 'using (context){}' makes sure the database closes after saving
+            using (VariablesContext Context = new VariablesContext())
+            {
+                // LINQ query that looks in table VariableName for UserVariable and selects the first instance of it (there should only be one
+                //  anyway.
+                Variables variableItemToBeDeleted = Context.VariablesTable.Where(v => v.VariableName == sentUserEntryDataForDelete.UserVariable).First();
+                Context.VariablesTable.Remove(variableItemToBeDeleted);
+                Context.SaveChanges();
+            }
+            return $"The {sentUserEntryDataForDelete.UserVariable} variable has been removed!";
         }
 
         public UserEntryData AddVariable(UserEntryData sentUserEntryDataForAdd)
@@ -47,7 +52,7 @@ namespace SavingVariables
             sentUserEntryDataForAdd.consoleOutputString = $"{sentUserEntryDataForAdd.UserCommand} = {sentUserEntryDataForAdd.UserNumericValue} added to database";
             return sentUserEntryDataForAdd;
         }
-
+        // Pretty-prints all database variables into a table
         public string ReturnAllVariableEqualities(UserEntryData sentUserEntryForShowAll)
         {
             string tableListOfVariables = "";
@@ -58,15 +63,16 @@ namespace SavingVariables
                 tableListOfVariables += "|  Name  |  Value |\n";
                 tableListOfVariables += " ----------------- \n";
 
+                // Database pull for showing all variable relationships
                 var databaseVariables = Context.VariablesTable;
                 foreach (var databaseLine in databaseVariables)
                 {
                     tableListOfVariables += $"|   {databaseLine.VariableName}    |    {databaseLine.VariableValue}   |\n";
                 }
+
                 tableListOfVariables += " ----------------- \n";
             }
-                // Database pull for showing all variable relationships
-                return tableListOfVariables;
+            return tableListOfVariables;
         }
     }
 }
