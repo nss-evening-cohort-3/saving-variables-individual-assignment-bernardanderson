@@ -8,6 +8,8 @@ namespace SavingVariables
 {
     class NonDatabaseCommands
     {
+        DatabaseCommands userDatabaseCommands = new DatabaseCommands();
+
         Dictionary<string, string> simpleUserCommands = new Dictionary<string, string>
         {
             { "lastq", "Prints the Last Entered Command or Expression" },
@@ -15,8 +17,6 @@ namespace SavingVariables
             { "clear|delete|remove", "Used to delete a variable (variable letter) or the entire database (all)" },
             { "show all", "List all set variables in a tabular format" }
         };
-
-        DatabaseCommands userDatabaseCommands = new DatabaseCommands();
 
         public UserEntryData RouteUserCommandToCorrectMethod(UserEntryData sentUserEntryData)
         {

@@ -25,10 +25,6 @@ namespace SavingVariables
 
                 if (userEntryData.ValidEntry)
                 {
-                    //Console.WriteLine($"Valid Command: { userEntryData.ValidEntry }");
-                    //Console.WriteLine($"User Command: { userEntryData.UserCommand }");
-                    //Console.WriteLine($"User UserVariableEqualsOrAll: { userEntryData.UserVariableEqualsOrAll }");
-                    //Console.WriteLine($"User UserNumericValue: { userEntryData.UserNumericValue }");
                     userEntryData = userNonDatabaseCommands.RouteUserCommandToCorrectMethod(userEntryData);
                 } else
                 {
@@ -43,7 +39,6 @@ namespace SavingVariables
                     break;
                 } else
                 {
-                    // Sets the 'lastq' command's data for every command except quit/exit
                     userEntryData.LastQ = userEntryData.EnteredUserString;
                 }
             }
