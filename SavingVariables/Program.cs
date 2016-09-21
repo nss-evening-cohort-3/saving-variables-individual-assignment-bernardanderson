@@ -10,8 +10,38 @@ namespace SavingVariables
     {
         static void Main(string[] args)
         {
-            Console.Write("Hello");
-            Console.ReadLine();
+            UserEntryData userEntryData = new UserEntryData();
+            Expressions userExpressions = new Expressions();
+            NonDatabaseCommands userNonDatabaseCommands = new NonDatabaseCommands();
+
+            Console.WriteLine("Welcome to the variable saving program.");
+            Console.WriteLine("Type 'help' for a list of valid commands.");
+
+            while (userEntryData.WantsToExit == false)
+            {
+                Console.Write(">> ");
+                userEntryData.EnteredUserString = Console.ReadLine();
+                userEntryData = userExpressions.CheckExpressionTypeAndParse(userEntryData);
+
+                if (userEntryData.ValidEntry)
+                {
+                    userEntryData = userNonDatabaseCommands.RouteUserCommandToCorrectMethod(userEntryData);
+                } else
+                {
+                    userEntryData.consoleOutputString = "Invalid Command";
+                }
+
+                Console.WriteLine(userEntryData.consoleOutputString);
+
+                if (userEntryData.consoleOutputString == "Goodbye!")
+                {
+                    Console.ReadKey();
+                    break;
+                } else
+                {
+                    userEntryData.LastQ = userEntryData.EnteredUserString;
+                }
+            }
         }
     }
 }
