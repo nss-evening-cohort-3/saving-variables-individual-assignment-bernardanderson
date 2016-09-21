@@ -7,8 +7,20 @@ using System.Threading.Tasks;
 
 namespace SavingVariables
 {
-    class DatabaseCommands
+    public class DatabaseCommands
     {
+        public VariablesContext Context { get; set; } // Dependancy Injection
+
+        public DatabaseCommands()
+        {
+            Context = new VariablesContext();
+        }
+
+        public DatabaseCommands(VariablesContext _context) // Dependancy Injection
+        {                                           // Dependancy Injection
+            Context = _context;                     // Dependancy Injection
+        }
+
         // Checks for the presence of a variable in the database 
         public bool IsVariableAlreadyPresentForAdd(UserEntryData sentUserEntryDataForAdd)
         {

@@ -8,7 +8,7 @@ using System.Data.Entity;
 
 namespace SavingVariables
 {
-    class VariablesContext : DbContext
+    public class VariablesContext : DbContext
     {
         // 'virtual' keyword is needed to use Moq during testing
         public virtual DbSet<Variables> VariablesTable { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SavingVariables
 {
-    class NonDatabaseCommands
+    public class NonDatabaseCommands
     {
         DatabaseCommands userDatabaseCommands = new DatabaseCommands();
 
