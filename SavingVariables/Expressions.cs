@@ -33,10 +33,20 @@ namespace SavingVariables
                 if (new Regex(regularExpressions[i]).IsMatch(sentUserInputFromCommandPrompt.EnteredUserString.ToLower())) // Cycles through all Regular Expression for a match  
                 {
                     Match matchedFields = new Regex(regularExpressions[i]).Match(sentUserInputFromCommandPrompt.EnteredUserString);
+
                     sentUserInputFromCommandPrompt.ValidEntry = true;
-                    sentUserInputFromCommandPrompt.UserCommand = matchedFields.Groups[1].ToString();
-                    sentUserInputFromCommandPrompt.UserVariable = matchedFields.Groups[2].ToString();
-                    sentUserInputFromCommandPrompt.UserNumericValue = matchedFields.Groups[3].ToString();
+                    if (i == 0)
+                    {
+                        sentUserInputFromCommandPrompt.UserCommand = "add";
+                        sentUserInputFromCommandPrompt.UserVariable = matchedFields.Groups[1].ToString();
+                        sentUserInputFromCommandPrompt.UserNumericValue = matchedFields.Groups[3].ToString();
+                    }
+                    else
+                    {
+                        sentUserInputFromCommandPrompt.UserCommand = matchedFields.Groups[1].ToString();
+                        sentUserInputFromCommandPrompt.UserVariable = matchedFields.Groups[2].ToString();
+                        sentUserInputFromCommandPrompt.UserNumericValue = matchedFields.Groups[3].ToString();
+                    }
 
                     return sentUserInputFromCommandPrompt;
                 }
