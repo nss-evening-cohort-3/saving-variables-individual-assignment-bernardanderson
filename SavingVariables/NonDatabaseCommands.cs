@@ -48,14 +48,18 @@ namespace SavingVariables
                 case ("lastq"):
                     sentUserEntryData.consoleOutputString = sentUserEntryData.LastQ;
                     break;
-                default: //The default has to be the setting/adding of a variable
+                case ("add"):
                     if (userDatabaseCommands.IsVariableAlreadyPresentForAdd(sentUserEntryData))
                     {
-                        sentUserEntryData.consoleOutputString = $"Error! {sentUserEntryData.UserCommand} is already defined!";
-                    } else
+                        sentUserEntryData.consoleOutputString = $"Error! {sentUserEntryData.UserVariable} is already defined!";
+                    }
+                    else
                     {
                         sentUserEntryData = userDatabaseCommands.AddVariable(sentUserEntryData);
                     }
+                    break;
+                default:
+                    sentUserEntryData.consoleOutputString = $"Invalid Entry!!";
                     break;
             }
             return sentUserEntryData;
